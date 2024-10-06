@@ -1,4 +1,4 @@
-@import url(https://fonts.googleapis.com/css?family=Poppins:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans:300,regular,500,600,700,800,300italic,italic,500italic,600italic,700italic,800italic);
 
 html {
 	box-sizing: border-box;
@@ -21,11 +21,11 @@ body {
 	justify-content: center;
 	align-items: center;
 	margin: 0;
-	font-family: 'Poppins', sans-serif;
+	font-family: 'Open Sans', sans-serif;
 	font-style: italic;
 }
 
-.fw-700{
+.fw-700 {
 	font-weight: 700;
 }
 
@@ -59,7 +59,7 @@ button {
 	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.btn-restart {
+.btn-restart__css {
 	color: #dc3545;
 }
 
@@ -83,13 +83,11 @@ button:focus {
 }
 
 .scoreboard {
-	/* background-color: rgba(0, 0, 0, 0.7); */
-	/* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); */
 	border-radius: 10px;
 	padding: 15px;
 	margin-left: 0;
 	color: rgba(0, 255, 0, 0.9);
-	font-family: 'Poppins', sans-serif;
+	font-family: 'Open Sans', sans-serif;
 	font-style: italic;
 	font-weight: 500;
 	text-align: left;
@@ -106,29 +104,50 @@ button:focus {
 	display: none;
 	align-items: center;
 	justify-content: center;
-	background: rgb(23, 23, 24, 0.5);
-
-	.container__overlay {
-		background: rgba(34, 193, 195, 1);
-		font-size: 40px;
-		padding: 10px 20px;
-		text-align: center;
-		border-radius: 15px;
-	}
-
-	.game-over {
-		color: #b30048;
-	}
-
-	.btn-restart {
-		cursor: pointer;
-		background: rgb(71, 181, 254);
-		margin-top: 20px;
-		padding: 20px;
-		border: 1px solid rgb(71, 181, 254);
-		border-radius: 15px;
-	}
+	background: rgba(34, 34, 34, 0.8);
+	color: #fff;	
 }
+
+.container__overlay {
+	background: #222;
+
+	font-size: 40px;
+	padding: 10px 20px;
+	text-align: center;
+	border-radius: 15px;
+}
+
+.overlay-img{
+	width: 13rem;
+	height: 15rem;
+}
+
+.game-over {
+	font-size: 4rem;
+}
+
+.game__over-score{
+	font-size: 2rem;
+	text-align: right;
+	line-height: 1.5;
+}
+
+.btn-tryagain {
+	display: inline-block;
+	cursor: pointer;
+	margin-top: 3rem;
+	padding: 0.6rem 1.2rem;
+	border-radius: 1rem;
+	font-size: 2rem;
+	background: #cccccc;
+	color: #333;
+	transition: all .3s ease;
+}
+
+.btn-tryagain:hover{
+	background-color: #bbb;
+}
+
 
 .tetris {
 	border: 0 solid rgb(255, 215, 0, 1);

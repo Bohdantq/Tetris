@@ -1,39 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
-   <head>
-      <meta charset="UTF-8">
-      <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Tetris</title>
-      <link rel="stylesheet" href="css/normolize.css">
-      <link rel="stylesheet" href="css/index.css">
-   </head>
-   <body>
-      <div class="container">
-         <div class="tetris">
+
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>Tetris</title>
+   <link rel="stylesheet" href="css/normolize.css">
+   <link rel="stylesheet" href="css/index.css">
+</head>
+
+<body>
+   <div class="container">
+      <div class="tetris">
+      </div>
+      <div class="scoreboard">
+         <div class="score">
+            <span class="label">Score:</span>
+            <span class="value fw-700" id="score-value">0</span>
          </div>
-         <div class="scoreboard">
-            <div class="score">
-               <span class="label">Score:</span>
-               <span class="value fw-700" id="score-value">0</span>
-            </div>
-            <button class="btn-start">Start</button>
-            <button class="btn-pause">Pause</button>
-            <button class="btn-restart">Restart</button>
-            <!-- <div class="level"><span class="label">Level:</span><span
+         <button class="btn-start">Start</button>
+         <button class="btn-pause">Pause</button>
+         <button class="btn-restart btn-restart__css">Restart</button>
+         <!-- <div class="level"><span class="label">Level:</span><span
                   class="value"
                   id="level-value">1</span></div> -->
 
-         </div>
       </div>
-      <div class="overlay">
-         <div class="container__overlay">
-            <p class="game-over md-20">Game over</p>
-            <p>Score <span class="score-result">0</span></p>
-            <p >Time played: <div class="time-game">0</div></p>
-            <button class="btn-restart md-20">Try again</button>
+   </div>
+   <div class="overlay">
+      <div class="container__overlay">
+         <img class="overlay-img" src="images/pac-man.png" alt="pac-man">
+         <p class="game-over">Game over</p>
+         <div class="game__over-score">
+            Score: <div class="score-result">0</div>
+            Time played: <div class="time-game">0</div>
          </div>
+         <button class="btn-restart btn-tryagain">Try again</button>
       </div>
+   </div>
 
-      <script src="js/main.js"></script>
-   </body>
+   <script src="js/main.js"></script>
+</body>
+
 </html>
