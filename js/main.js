@@ -9,7 +9,8 @@ let score = 0;
 let scoreElement = document.getElementById('score-value');
 let btnStart = document.querySelector('.btn-start');
 let pause = document.querySelector('.btn-pause');
-let btnRestart = document.querySelector('.btn-restart');
+let btnRestart = document.getElementById('btn-restart');
+let btnTryAgain = document.getElementById('btn-tryagain');
 
 let overlay = document.querySelector('.overlay');
 let timeGame = document.querySelector('.time-game');
@@ -72,6 +73,15 @@ function init() {
 	moveDown();
 }
 
+function resetState() {
+	score = 0;
+	scoreElement.innerHTML = 0;
+	isGameOver = false;
+	isPaused = false;
+	i = 0;
+	timeGame.innerHTML = '0 sek';	
+}
+
 generatePlayfield();
 cells = document.querySelectorAll('.tetris div');
 
@@ -118,7 +128,11 @@ function generatePlayfield() {
 // -----------------------------------------
 
 btnStart.addEventListener('click', function () {
-	init()
+	if (!btnStart.classList.contains('disabled')) {
+		init();
+		btnStart.classList.add('disabled');
+		btnStart.setAttribute('disabled', true);
+	}
 })
 
 pause.addEventListener('click', function () {
@@ -144,18 +158,28 @@ btnRestart.addEventListener('click', function () {
 	document.querySelector('.tetris').innerHTML = ''; //Clear the playfield
 
 	// Reset game state
-	score = 0;
-	scoreElement.innerHTML = 0;
-	isGameOver = false;
-	isPaused = false;
-	i = 0;
+	resetState();
+
+	generatePlayfield();
+	cells = document.querySelectorAll('.tetris div');
+	generateTetromino();
+	startLoop();
+});
+
+btnTryAgain.addEventListener('click', function () {
+	stopLoop();
+	timeGameStop();
+
+	document.querySelector('.tetris').innerHTML = '';
+
+	resetState();
 
 	overlay.style.display = 'none';
 
 	generatePlayfield();
 	cells = document.querySelectorAll('.tetris div');
 	generateTetromino();
-})
+});
 
 document.addEventListener('keydown', onKeyDown);
 
@@ -361,7 +385,8 @@ function placeTetromino() {
 				isGameOver = true;
 				overlay.style.display = 'flex';
 				timeGameStop();
-				timeGame.innerHTML = i + 'sek';
+				timeGame.innerHTML = i + ' sek';
+				document.getElementById('score-result').innerHTML = score;
 				return;
 			}
 			if (tetromino.matrix[row][column]) {
