@@ -80,6 +80,8 @@ function resetState() {
 	isPaused = false;
 	i = 0;
 	timeGame.innerHTML = '0 sek';	
+	btnStart.classList.remove('disabled');
+	btnStart.removeAttribute('disabled');
 }
 
 generatePlayfield();
@@ -132,6 +134,7 @@ btnStart.addEventListener('click', function () {
 		init();
 		btnStart.classList.add('disabled');
 		btnStart.setAttribute('disabled', true);
+		timeGameStart();
 	}
 })
 
@@ -163,7 +166,6 @@ btnRestart.addEventListener('click', function () {
 	generatePlayfield();
 	cells = document.querySelectorAll('.tetris div');
 	generateTetromino();
-	startLoop();
 });
 
 btnTryAgain.addEventListener('click', function () {
@@ -175,7 +177,7 @@ btnTryAgain.addEventListener('click', function () {
 	resetState();
 
 	overlay.style.display = 'none';
-
+	
 	generatePlayfield();
 	cells = document.querySelectorAll('.tetris div');
 	generateTetromino();
@@ -208,18 +210,23 @@ function onKeyDown(event) {
 	draw();
 }
 // Панель управління для моб версій і не тільки
-// const btnLeft = document.querySelector('.ArrowLeft')
-// const btnRight = document.querySelector('.ArrowRight')
+const btnLeft = document.getElementById('leftBtn');
+const btnRight = document.getElementById('rightBtn');
+const btnRotate = document.getElementById('rotateBtn');
 
-// btnLeft.addEventListener('click', function () {
-// 	moveTetrominoLeft()
-// 	draw()
-// })
+btnLeft.addEventListener('click', function () {
+	moveTetrominoLeft()
+	draw()
+})
 
-// btnRight.addEventListener('click', function () {
-// 	moveTetrominoLeft()
-// 	draw()
-// })
+btnRight.addEventListener('click', function () {
+	moveTetrominoRight()
+	draw()
+})
+btnRotate.addEventListener('click', function () {
+	rotate()
+	draw()
+})
 
 function moveTetrominoDown() {
 	tetromino.row += 1;
@@ -371,12 +378,12 @@ function countScore(destroyRows) {
 	if (destroyRows == 5) {
 		score += 250;
 	}
-	if (destroyRows == 6) {
-		score += 500;
-	}
 	scoreElement.innerHTML = score;
 }
 
+// -----------------------------------------
+// PLACE
+// -----------------------------------------
 function placeTetromino() {
 	const tetrominoMatrixSize = tetromino.matrix.length;
 	for (let row = 0; row < tetrominoMatrixSize; row++) {
