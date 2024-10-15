@@ -210,7 +210,7 @@ button:disabled {
 	}
 }
 
-@media(max-width: 60rem) {
+@media(max-width: 48rem) {
 	.mob__controls {
 		display: flex;
 		justify-content: center;
