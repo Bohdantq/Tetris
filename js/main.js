@@ -5,7 +5,12 @@ let cells;
 let isPaused = false;
 let timedId;
 let isGameOver = false;
+let level = 1;
 let score = 0;
+let dropInterval = 1000;
+const levelUpScore = 100;
+let gameInterval;
+document.getElementById('levelDisplay').innerText = `Level: ${level}`;
 let scoreElement = document.getElementById('score-value');
 let btnStart = document.querySelector('.btn-start');
 let pause = document.querySelector('.btn-pause');
@@ -69,6 +74,9 @@ function init() {
 	score = 0;
 	scoreElement.innerHTML = 0;
 	isGameOver = false;
+	level = 1;
+	document.getElementById('levelDisplay').innerText = `Level: ${level}`;
+	dropInterval = 1000;
 	generateTetromino();
 	moveDown();
 }
@@ -79,7 +87,7 @@ function resetState() {
 	isGameOver = false;
 	isPaused = false;
 	i = 0;
-	timeGame.innerHTML = '0 sek';	
+	timeGame.innerHTML = '0 sek';
 	btnStart.classList.remove('disabled');
 	btnStart.removeAttribute('disabled');
 }
@@ -146,9 +154,12 @@ function togglePaused() {
 	if (isPaused) {
 		startLoop();
 		timeGameStart();
-	} else {
+		pause.textContent = 'Pause';
+	}
+	else {
 		stopLoop();
 		timeGameStop();
+		pause.textContent = 'Resume';
 	}
 
 	isPaused = !isPaused;
@@ -158,7 +169,7 @@ btnRestart.addEventListener('click', function () {
 	stopLoop();
 	timeGameStop();
 
-	document.querySelector('.tetris').innerHTML = ''; //Clear the playfield
+	document.querySelector('.tetris').innerHTML = ''; 
 
 	// Reset game state
 	resetState();
@@ -177,7 +188,7 @@ btnTryAgain.addEventListener('click', function () {
 	resetState();
 
 	overlay.style.display = 'none';
-	
+
 	generatePlayfield();
 	cells = document.querySelectorAll('.tetris div');
 	generateTetromino();
@@ -466,6 +477,15 @@ function timeGameStart() {
 function timeGameStop() {
 	clearInterval(timeGameId)
 	timeGameId = null;
+}
+
+function updateGame(){
+	if(score >= level * levelUpScore){
+		level++;
+		dropInterval = Math.max(100, dropInterval * 0.9);
+		clearInterval(gameInterval);
+		gameInterval = setInterval(updateGame, dropInterval);
+	}
 }
 
 timeGameStart();
